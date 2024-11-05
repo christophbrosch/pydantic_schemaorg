@@ -14,23 +14,35 @@ class MusicPlaylist(CreativeWork):
     See: https://schema.org/MusicPlaylist
     Model depth: 3
     """
-    type_: str = Field(default="MusicPlaylist", alias='@type', const=True)
-    numTracks: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="The number of tracks in this album or playlist.",
-    )
-    tracks: Optional[Union[List[Union['MusicRecording', str]], 'MusicRecording', str]] = Field(
+
+    type_: str = Field(default="MusicPlaylist", alias="@type", Literal=True)
+    tracks: Optional[
+        Union[List[Union["MusicRecording", str]], "MusicRecording", str]
+    ] = Field(
         default=None,
         description="A music recording (track)&#x2014;usually a single song.",
     )
-    track: Optional[Union[List[Union['ItemList', 'MusicRecording', str]], 'ItemList', 'MusicRecording', str]] = Field(
+    numTracks: Optional[
+        Union[List[Union[int, "Integer", str]], int, "Integer", str]
+    ] = Field(
+        default=None,
+        description="The number of tracks in this album or playlist.",
+    )
+    track: Optional[
+        Union[
+            List[Union["ItemList", "MusicRecording", str]],
+            "ItemList",
+            "MusicRecording",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="A music recording (track)&#x2014;usually a single song. If an ItemList is given, the"
-     "list should contain items of type MusicRecording.",
+        "list should contain items of type MusicRecording.",
     )
-    
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.MusicRecording import MusicRecording
+    from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.ItemList import ItemList

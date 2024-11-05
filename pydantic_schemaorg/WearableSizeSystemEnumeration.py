@@ -6,10 +6,12 @@ from pydantic_schemaorg.SizeSystemEnumeration import SizeSystemEnumeration
 
 
 class WearableSizeSystemEnumeration(SizeSystemEnumeration):
-    """Enumerates common size systems specific for wearable products
+    """Enumerates common size systems specific for wearable products.
 
     See: https://schema.org/WearableSizeSystemEnumeration
     Model depth: 5
     """
-    type_: str = Field(default="WearableSizeSystemEnumeration", alias='@type', const=True)
-    
+
+    type_: str = Field(
+        default="WearableSizeSystemEnumeration", alias="@type", Literal=True
+    )

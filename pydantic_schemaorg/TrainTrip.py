@@ -14,33 +14,38 @@ class TrainTrip(Trip):
     See: https://schema.org/TrainTrip
     Model depth: 4
     """
-    type_: str = Field(default="TrainTrip", alias='@type', const=True)
-    arrivalStation: Optional[Union[List[Union['TrainStation', str]], 'TrainStation', str]] = Field(
-        default=None,
-        description="The station where the train trip ends.",
-    )
-    departurePlatform: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The platform from which the train departs.",
-    )
-    trainNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The unique identifier for the train.",
-    )
-    arrivalPlatform: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+
+    type_: str = Field(default="TrainTrip", alias="@type", Literal=True)
+    arrivalPlatform: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="The platform where the train arrives.",
     )
-    trainName: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    arrivalStation: Optional[
+        Union[List[Union["TrainStation", str]], "TrainStation", str]
+    ] = Field(
         default=None,
-        description="The name of the train (e.g. The Orient Express).",
+        description="The station where the train trip ends.",
     )
-    departureStation: Optional[Union[List[Union['TrainStation', str]], 'TrainStation', str]] = Field(
+    departureStation: Optional[
+        Union[List[Union["TrainStation", str]], "TrainStation", str]
+    ] = Field(
         default=None,
         description="The station from which the train departs.",
     )
-    
+    departurePlatform: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The platform from which the train departs.",
+    )
+    trainNumber: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The unique identifier for the train.",
+    )
+    trainName: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The name of the train (e.g. The Orient Express).",
+    )
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.TrainStation import TrainStation
     from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.TrainStation import TrainStation

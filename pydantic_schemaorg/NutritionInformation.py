@@ -14,58 +14,61 @@ class NutritionInformation(StructuredValue):
     See: https://schema.org/NutritionInformation
     Model depth: 4
     """
-    type_: str = Field(default="NutritionInformation", alias='@type', const=True)
-    calories: Optional[Union[List[Union['Energy', str]], 'Energy', str]] = Field(
-        default=None,
-        description="The number of calories.",
-    )
-    cholesterolContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of milligrams of cholesterol.",
-    )
-    fatContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of grams of fat.",
-    )
-    transFatContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
+
+    type_: str = Field(default="NutritionInformation", alias="@type", Literal=True)
+    transFatContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
         default=None,
         description="The number of grams of trans fat.",
     )
-    servingSize: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The serving size, in terms of the number of volume or mass.",
-    )
-    unsaturatedFatContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of grams of unsaturated fat.",
-    )
-    saturatedFatContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of grams of saturated fat.",
-    )
-    carbohydrateContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of grams of carbohydrates.",
-    )
-    proteinContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of grams of protein.",
-    )
-    sodiumContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of milligrams of sodium.",
-    )
-    fiberContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
-        default=None,
-        description="The number of grams of fiber.",
-    )
-    sugarContent: Optional[Union[List[Union['Mass', str]], 'Mass', str]] = Field(
+    sugarContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
         default=None,
         description="The number of grams of sugar.",
     )
-    
+    unsaturatedFatContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = (
+        Field(
+            default=None,
+            description="The number of grams of unsaturated fat.",
+        )
+    )
+    fatContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of grams of fat.",
+    )
+    fiberContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of grams of fiber.",
+    )
+    sodiumContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of milligrams of sodium.",
+    )
+    cholesterolContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of milligrams of cholesterol.",
+    )
+    carbohydrateContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of grams of carbohydrates.",
+    )
+    servingSize: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The serving size, in terms of the number of volume or mass.",
+    )
+    calories: Optional[Union[List[Union["Energy", str]], "Energy", str]] = Field(
+        default=None,
+        description="The number of calories.",
+    )
+    saturatedFatContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of grams of saturated fat.",
+    )
+    proteinContent: Optional[Union[List[Union["Mass", str]], "Mass", str]] = Field(
+        default=None,
+        description="The number of grams of protein.",
+    )
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Energy import Energy
     from pydantic_schemaorg.Mass import Mass
     from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.Energy import Energy

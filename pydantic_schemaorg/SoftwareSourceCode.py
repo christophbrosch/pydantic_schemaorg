@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
 from typing import List, Optional, Union
+from pydantic import AnyUrl
 
 
 from pydantic import Field
@@ -16,45 +16,57 @@ class SoftwareSourceCode(CreativeWork):
     See: https://schema.org/SoftwareSourceCode
     Model depth: 3
     """
-    type_: str = Field(default="SoftwareSourceCode", alias='@type', const=True)
-    codeRepository: Optional[Union[List[Union[AnyUrl, 'URL', str]], AnyUrl, 'URL', str]] = Field(
+
+    type_: str = Field(default="SoftwareSourceCode", alias="@type", Literal=True)
+    targetProduct: Optional[
+        Union[List[Union["SoftwareApplication", str]], "SoftwareApplication", str]
+    ] = Field(
+        default=None,
+        description="Target Operating System / Product to which the code applies. If applies to several versions,"
+        "just the product name can be used.",
+    )
+    codeRepository: Optional[
+        Union[List[Union[AnyUrl, "URL", str]], AnyUrl, "URL", str]
+    ] = Field(
         default=None,
         description="Link to the repository where the un-compiled, human readable code and related code is"
-     "located (SVN, github, CodePlex).",
+        "located (SVN, GitHub, CodePlex).",
     )
-    runtimePlatform: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    runtimePlatform: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
-        description="Runtime platform or script interpreter dependencies (Example - Java v1, Python2.3,"
-     ".Net Framework 3.0).",
+        description="Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3,"
+        ".NET Framework 3.0).",
     )
-    programmingLanguage: Optional[Union[List[Union[str, 'Text', 'ComputerLanguage']], str, 'Text', 'ComputerLanguage']] = Field(
+    sampleType: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="What type of code sample: full (compile ready) solution, code snippet, inline code,"
+        "scripts, template.",
+    )
+    programmingLanguage: Optional[
+        Union[
+            List[Union[str, "Text", "ComputerLanguage"]],
+            str,
+            "Text",
+            "ComputerLanguage",
+        ]
+    ] = Field(
         default=None,
         description="The computer programming language.",
     )
-    runtime: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    runtime: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
-        description="Runtime platform or script interpreter dependencies (Example - Java v1, Python2.3,"
-     ".Net Framework 3.0).",
+        description="Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3,"
+        ".NET Framework 3.0).",
     )
-    codeSampleType: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="What type of code sample: full (compile ready) solution, code snippet, inline code,"
-     "scripts, template.",
-    )
-    sampleType: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    codeSampleType: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="What type of code sample: full (compile ready) solution, code snippet, inline code,"
-     "scripts, template.",
+        "scripts, template.",
     )
-    targetProduct: Optional[Union[List[Union['SoftwareApplication', str]], 'SoftwareApplication', str]] = Field(
-        default=None,
-        description="Target Operating System / Product to which the code applies. If applies to several versions,"
-     "just the product name can be used.",
-    )
-    
+
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.SoftwareApplication import SoftwareApplication
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.ComputerLanguage import ComputerLanguage
-    from pydantic_schemaorg.SoftwareApplication import SoftwareApplication

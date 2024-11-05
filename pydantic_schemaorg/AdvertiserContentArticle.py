@@ -13,5 +13,5 @@ class AdvertiserContentArticle(Article):
     See: https://schema.org/AdvertiserContentArticle
     Model depth: 4
     """
-    type_: str = Field(default="AdvertiserContentArticle", alias='@type', const=True)
-    
+
+    type_: str = Field(default="AdvertiserContentArticle", alias="@type", Literal=True)

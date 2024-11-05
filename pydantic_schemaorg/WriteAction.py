@@ -14,19 +14,22 @@ class WriteAction(CreateAction):
     See: https://schema.org/WriteAction
     Model depth: 4
     """
-    type_: str = Field(default="WriteAction", alias='@type', const=True)
-    language: Optional[Union[List[Union['Language', str]], 'Language', str]] = Field(
+
+    type_: str = Field(default="WriteAction", alias="@type", Literal=True)
+    inLanguage: Optional[
+        Union[List[Union[str, "Text", "Language"]], str, "Text", "Language"]
+    ] = Field(
+        default=None,
+        description="The language of the content or performance or used in an action. Please use one of the language"
+        "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
+        "[[availableLanguage]].",
+    )
+    language: Optional[Union[List[Union["Language", str]], "Language", str]] = Field(
         default=None,
         description="A sub property of instrument. The language used on this action.",
     )
-    inLanguage: Optional[Union[List[Union[str, 'Text', 'Language']], str, 'Text', 'Language']] = Field(
-        default=None,
-        description="The language of the content or performance or used in an action. Please use one of the language"
-     "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
-     "[[availableLanguage]].",
-    )
-    
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Language import Language
     from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.Language import Language

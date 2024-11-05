@@ -13,5 +13,5 @@ class TrainReservation(Reservation):
     See: https://schema.org/TrainReservation
     Model depth: 4
     """
-    type_: str = Field(default="TrainReservation", alias='@type', const=True)
-    
+
+    type_: str = Field(default="TrainReservation", alias="@type", Literal=True)

@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
 from typing import List, Optional, Union
+from pydantic import AnyUrl
 
 
 from pydantic import Field
@@ -16,20 +16,25 @@ class PodcastSeries(CreativeWorkSeries):
     See: https://schema.org/PodcastSeries
     Model depth: 4
     """
-    type_: str = Field(default="PodcastSeries", alias='@type', const=True)
-    webFeed: Optional[Union[List[Union[AnyUrl, 'URL', 'DataFeed', str]], AnyUrl, 'URL', 'DataFeed', str]] = Field(
+
+    type_: str = Field(default="PodcastSeries", alias="@type", Literal=True)
+    actor: Optional[Union[List[Union["Person", str]], "Person", str]] = Field(
+        default=None,
+        description="An actor, e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated"
+        "with individual items or with a series, episode, clip.",
+    )
+    webFeed: Optional[
+        Union[
+            List[Union[AnyUrl, "URL", "DataFeed", str]], AnyUrl, "URL", "DataFeed", str
+        ]
+    ] = Field(
         default=None,
         description="The URL for a feed, e.g. associated with a podcast series, blog, or series of date-stamped"
-     "updates. This is usually RSS or Atom.",
+        "updates. This is usually RSS or Atom.",
     )
-    actor: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
-        default=None,
-        description="An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated"
-     "with individual items or with a series, episode, clip.",
-    )
-    
+
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.DataFeed import DataFeed
-    from pydantic_schemaorg.Person import Person

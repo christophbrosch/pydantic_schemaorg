@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from pydantic import StrictBool
+from typing import List, Optional, Union
 
 
 from pydantic import Field
@@ -15,22 +15,27 @@ class HealthPlanNetwork(Intangible):
     See: https://schema.org/HealthPlanNetwork
     Model depth: 3
     """
-    type_: str = Field(default="HealthPlanNetwork", alias='@type', const=True)
-    healthPlanNetworkTier: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+
+    type_: str = Field(default="HealthPlanNetwork", alias="@type", Literal=True)
+    healthPlanCostSharing: Optional[
+        Union[List[Union[StrictBool, "Boolean", str]], StrictBool, "Boolean", str]
+    ] = Field(
         default=None,
-        description="The tier(s) for this network.",
+        description="The costs to the patient for services under this network or formulary.",
     )
-    healthPlanNetworkId: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    healthPlanNetworkTier: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = (
+        Field(
+            default=None,
+            description="The tier(s) for this network.",
+        )
+    )
+    healthPlanNetworkId: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="Name or unique ID of network. (Networks are often reused across different insurance"
-     "plans).",
+        "plans.)",
     )
-    healthPlanCostSharing: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
-        default=None,
-        description="Whether The costs to the patient for services under this network or formulary.",
-    )
-    
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Boolean import Boolean
+    from pydantic_schemaorg.Text import Text

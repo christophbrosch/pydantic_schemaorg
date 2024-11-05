@@ -6,10 +6,10 @@ from pydantic_schemaorg.ReturnFeesEnumeration import ReturnFeesEnumeration
 
 
 class RestockingFees(ReturnFeesEnumeration):
-    """Specifies that the customer must pay a restocking fee when returning a product
+    """Specifies that the customer must pay a restocking fee when returning a product.
 
     See: https://schema.org/RestockingFees
     Model depth: 5
     """
-    type_: str = Field(default="RestockingFees", alias='@type', const=True)
-    
+
+    type_: str = Field(default="RestockingFees", alias="@type", Literal=True)

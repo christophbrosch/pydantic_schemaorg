@@ -10,18 +10,33 @@ from pydantic_schemaorg.ListItem import ListItem
 
 
 class HowToItem(ListItem):
-    """An item used as either a tool or supply when performing the instructions for how to to achieve"
+    """An item used as either a tool or supply when performing the instructions for how to achieve"
      "a result.
 
     See: https://schema.org/HowToItem
     Model depth: 4
     """
-    type_: str = Field(default="HowToItem", alias='@type', const=True)
-    requiredQuantity: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text', 'QuantitativeValue']], StrictInt, StrictFloat, 'Number', str, 'Text', 'QuantitativeValue']] = Field(
+
+    type_: str = Field(default="HowToItem", alias="@type", Literal=True)
+    requiredQuantity: Optional[
+        Union[
+            List[
+                Union[
+                    StrictInt, StrictFloat, "Number", str, "Text", "QuantitativeValue"
+                ]
+            ],
+            StrictInt,
+            StrictFloat,
+            "Number",
+            str,
+            "Text",
+            "QuantitativeValue",
+        ]
+    ] = Field(
         default=None,
         description="The required quantity of the item(s).",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Number import Number

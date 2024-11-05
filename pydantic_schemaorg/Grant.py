@@ -23,19 +23,57 @@ class Grant(Intangible):
     See: https://schema.org/Grant
     Model depth: 3
     """
-    type_: str = Field(default="Grant", alias='@type', const=True)
-    fundedItem: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
+
+    type_: str = Field(default="Grant", alias="@type", Literal=True)
+    funder: Optional[
+        Union[List[Union["Organization", "Person", str]], "Organization", "Person", str]
+    ] = Field(
         default=None,
-        description="Indicates an item funded or sponsored through a [[Grant]].",
+        description="A person or organization that supports (sponsors) something through some kind of financial"
+        "contribution.",
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    fundedItem: Optional[
+        Union[
+            List[
+                Union[
+                    "Organization",
+                    "Product",
+                    "MedicalEntity",
+                    "Event",
+                    "CreativeWork",
+                    "BioChemEntity",
+                    "Person",
+                    str,
+                ]
+            ],
+            "Organization",
+            "Product",
+            "MedicalEntity",
+            "Event",
+            "CreativeWork",
+            "BioChemEntity",
+            "Person",
+            str,
+        ]
+    ] = Field(
+        default=None,
+        description="Indicates something directly or indirectly funded or sponsored through a [[Grant]]."
+        "See also [[ownershipFundingInfo]].",
+    )
+    sponsor: Optional[
+        Union[List[Union["Organization", "Person", str]], "Organization", "Person", str]
+    ] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
-     "contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+        "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
     )
-    
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
+    from pydantic_schemaorg.Product import Product
+    from pydantic_schemaorg.MedicalEntity import MedicalEntity
+    from pydantic_schemaorg.Event import Event
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.BioChemEntity import BioChemEntity

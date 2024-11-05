@@ -14,20 +14,25 @@ class AggregateRating(Rating):
     See: https://schema.org/AggregateRating
     Model depth: 4
     """
-    type_: str = Field(default="AggregateRating", alias='@type', const=True)
-    reviewCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="The count of total number of reviews.",
-    )
-    ratingCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+
+    type_: str = Field(default="AggregateRating", alias="@type", Literal=True)
+    ratingCount: Optional[
+        Union[List[Union[int, "Integer", str]], int, "Integer", str]
+    ] = Field(
         default=None,
         description="The count of total number of ratings.",
     )
-    itemReviewed: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
+    reviewCount: Optional[
+        Union[List[Union[int, "Integer", str]], int, "Integer", str]
+    ] = Field(
+        default=None,
+        description="The count of total number of reviews.",
+    )
+    itemReviewed: Optional[Union[List[Union["Thing", str]], "Thing", str]] = Field(
         default=None,
         description="The item that is being reviewed/rated.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Integer import Integer

@@ -11,19 +11,29 @@ from pydantic_schemaorg.Accommodation import Accommodation
 
 class House(Accommodation):
     """A house is a building or structure that has the ability to be occupied for habitation by"
-     "humans or other creatures (Source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/House\">http://en.wikipedia.org/wiki/House</a>).
+     "humans or other creatures (source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/House\">http://en.wikipedia.org/wiki/House</a>).
 
     See: https://schema.org/House
     Model depth: 4
     """
-    type_: str = Field(default="House", alias='@type', const=True)
-    numberOfRooms: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', 'QuantitativeValue', str]], StrictInt, StrictFloat, 'Number', 'QuantitativeValue', str]] = Field(
+
+    type_: str = Field(default="House", alias="@type", Literal=True)
+    numberOfRooms: Optional[
+        Union[
+            List[Union[StrictInt, StrictFloat, "Number", "QuantitativeValue", str]],
+            StrictInt,
+            StrictFloat,
+            "Number",
+            "QuantitativeValue",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="The number of rooms (excluding bathrooms and closets) of the accommodation or lodging"
-     "business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be"
-     "put in the unitText property of the QuantitativeValue.",
+        "business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be"
+        "put in the unitText property of the QuantitativeValue.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Number import Number

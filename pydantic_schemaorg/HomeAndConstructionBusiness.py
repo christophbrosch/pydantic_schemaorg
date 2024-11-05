@@ -13,5 +13,7 @@ class HomeAndConstructionBusiness(LocalBusiness):
     See: https://schema.org/HomeAndConstructionBusiness
     Model depth: 4
     """
-    type_: str = Field(default="HomeAndConstructionBusiness", alias='@type', const=True)
-    
+
+    type_: str = Field(
+        default="HomeAndConstructionBusiness", alias="@type", Literal=True
+    )

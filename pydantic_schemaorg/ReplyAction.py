@@ -9,18 +9,19 @@ from pydantic_schemaorg.CommunicateAction import CommunicateAction
 
 
 class ReplyAction(CommunicateAction):
-    """The act of responding to a question/message asked/sent by the object. Related to [[AskAction]]"
+    """The act of responding to a question/message asked/sent by the object. Related to [[AskAction]]."
      "Related actions: * [[AskAction]]: Appears generally as an origin of a ReplyAction.
 
     See: https://schema.org/ReplyAction
     Model depth: 5
     """
-    type_: str = Field(default="ReplyAction", alias='@type', const=True)
-    resultComment: Optional[Union[List[Union['Comment', str]], 'Comment', str]] = Field(
+
+    type_: str = Field(default="ReplyAction", alias="@type", Literal=True)
+    resultComment: Optional[Union[List[Union["Comment", str]], "Comment", str]] = Field(
         default=None,
         description="A sub property of result. The Comment created or sent as a result of this action.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Comment import Comment

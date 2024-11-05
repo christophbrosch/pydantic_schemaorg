@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.MediaManipulationRatingEnumeration import MediaManipulationRatingEnumeration
+from pydantic_schemaorg.MediaManipulationRatingEnumeration import (
+    MediaManipulationRatingEnumeration,
+)
 
 
 class OriginalMediaContent(MediaManipulationRatingEnumeration):
@@ -20,5 +22,5 @@ class OriginalMediaContent(MediaManipulationRatingEnumeration):
     See: https://schema.org/OriginalMediaContent
     Model depth: 5
     """
-    type_: str = Field(default="OriginalMediaContent", alias='@type', const=True)
-    
+
+    type_: str = Field(default="OriginalMediaContent", alias="@type", Literal=True)

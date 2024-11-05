@@ -16,25 +16,35 @@ class FlightReservation(Reservation):
     See: https://schema.org/FlightReservation
     Model depth: 4
     """
-    type_: str = Field(default="FlightReservation", alias='@type', const=True)
-    passengerSequenceNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+
+    type_: str = Field(default="FlightReservation", alias="@type", Literal=True)
+    passengerPriorityStatus: Optional[
+        Union[
+            List[Union[str, "Text", "QualitativeValue"]],
+            str,
+            "Text",
+            "QualitativeValue",
+        ]
+    ] = Field(
         default=None,
-        description="The passenger's sequence number as assigned by the airline.",
+        description="The priority status assigned to a passenger for security or boarding (e.g. FastTrack"
+        "or Priority).",
     )
-    securityScreening: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    securityScreening: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="The type of security screening the passenger is subject to.",
     )
-    passengerPriorityStatus: Optional[Union[List[Union[str, 'Text', 'QualitativeValue']], str, 'Text', 'QualitativeValue']] = Field(
-        default=None,
-        description="The priority status assigned to a passenger for security or boarding (e.g. FastTrack"
-     "or Priority).",
+    passengerSequenceNumber: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = (
+        Field(
+            default=None,
+            description="The passenger's sequence number as assigned by the airline.",
+        )
     )
-    boardingGroup: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    boardingGroup: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="The airline-specific indicator of boarding order / preference.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text

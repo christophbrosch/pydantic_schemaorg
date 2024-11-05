@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.WearableSizeSystemEnumeration import WearableSizeSystemEnumeration
+from pydantic_schemaorg.WearableSizeSystemEnumeration import (
+    WearableSizeSystemEnumeration,
+)
 
 
 class WearableSizeSystemContinental(WearableSizeSystemEnumeration):
@@ -11,5 +13,7 @@ class WearableSizeSystemContinental(WearableSizeSystemEnumeration):
     See: https://schema.org/WearableSizeSystemContinental
     Model depth: 6
     """
-    type_: str = Field(default="WearableSizeSystemContinental", alias='@type', const=True)
-    
+
+    type_: str = Field(
+        default="WearableSizeSystemContinental", alias="@type", Literal=True
+    )

@@ -17,14 +17,17 @@ class LegislationObject(Legislation, MediaObject):
     See: https://schema.org/LegislationObject
     Model depth: 4
     """
-    type_: str = Field(default="LegislationObject", alias='@type', const=True)
-    legislationLegalValue: Optional[Union[List[Union['LegalValueLevel', str]], 'LegalValueLevel', str]] = Field(
+
+    type_: str = Field(default="LegislationObject", alias="@type", Literal=True)
+    legislationLegalValue: Optional[
+        Union[List[Union["LegalValueLevel", str]], "LegalValueLevel", str]
+    ] = Field(
         default=None,
         description="The legal value of this legislation file. The same legislation can be written in multiple"
-     "files with different legal values. Typically a digitally signed PDF have a \"stronger\""
-     "legal value than the HTML file of the same act.",
+        'files with different legal values. Typically a digitally signed PDF have a "stronger"'
+        "legal value than the HTML file of the same act.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.LegalValueLevel import LegalValueLevel

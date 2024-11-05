@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.PriceComponentTypeEnumeration import PriceComponentTypeEnumeration
+from pydantic_schemaorg.PriceComponentTypeEnumeration import (
+    PriceComponentTypeEnumeration,
+)
 
 
 class CleaningFee(PriceComponentTypeEnumeration):
@@ -12,5 +14,5 @@ class CleaningFee(PriceComponentTypeEnumeration):
     See: https://schema.org/CleaningFee
     Model depth: 5
     """
-    type_: str = Field(default="CleaningFee", alias='@type', const=True)
-    
+
+    type_: str = Field(default="CleaningFee", alias="@type", Literal=True)

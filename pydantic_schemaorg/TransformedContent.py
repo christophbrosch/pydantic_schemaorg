@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.MediaManipulationRatingEnumeration import MediaManipulationRatingEnumeration
+from pydantic_schemaorg.MediaManipulationRatingEnumeration import (
+    MediaManipulationRatingEnumeration,
+)
 
 
 class TransformedContent(MediaManipulationRatingEnumeration):
@@ -11,7 +13,7 @@ class TransformedContent(MediaManipulationRatingEnumeration):
      "or all of the video has been manipulated to transform the footage itself. This category"
      "includes using tools like the Adobe Suite to change the speed of the video, add or remove"
      "visual elements or dub audio. Deepfakes are also a subset of transformation. For an [[ImageObject]]"
-     "to be transformed content': Adding or deleting visual elements to give the image a different"
+     "to be 'transformed content': Adding or deleting visual elements to give the image a different"
      "meaning with the intention to mislead. For an [[ImageObject]] with embedded text to"
      "be 'transformed content': Adding or deleting visual elements to give the image a different"
      "meaning with the intention to mislead. For an [[AudioObject]] to be 'transformed content':"
@@ -21,5 +23,5 @@ class TransformedContent(MediaManipulationRatingEnumeration):
     See: https://schema.org/TransformedContent
     Model depth: 5
     """
-    type_: str = Field(default="TransformedContent", alias='@type', const=True)
-    
+
+    type_: str = Field(default="TransformedContent", alias="@type", Literal=True)

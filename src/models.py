@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, ValidationInfo, field_validator
 
 
 class PydanticBase(BaseModel):
@@ -8,11 +8,13 @@ class PydanticBase(BaseModel):
     description: str
     valid_name: Optional[str] = None
 
-    @validator("valid_name", always=True)
-    def ab(cls, v, values) -> str:
-        if not values["name"]:
+    # TODO[pydantic]: We couldn't refactor the `validator`, please replace it by `field_validator` manually.
+    # Check https://docs.pydantic.dev/dev-v2/migration/#changes-to-validators for more information.
+    @field_validator("valid_name")
+    def validate_name(cls, value) -> str:
+        if not value:
             raise ValueError()
-        elif values["name"] in {
+        elif value in {
             "class",
             "def",
             "from",
@@ -22,10 +24,10 @@ class PydanticBase(BaseModel):
             "True",
             "False",
         }:
-            return f"{values['name']}_"
-        if values["name"][0].isdigit():
-            return f"_{values['name']}"
-        return values["name"]
+            return f"{value}_"
+        if value[0].isdigit():
+            return f"_{value}"
+        return value
 
 
 class PydanticField(PydanticBase):
@@ -40,7 +42,7 @@ class Import(BaseModel):
 
 class PydanticClass(PydanticBase):
     fields: List[PydanticField]
-    parents: List['PydanticClass']
+    parents: List["PydanticClass"]
     depth: int = 1
     parent_imports: List[Import]
     field_imports: List[Import]
@@ -48,11 +50,13 @@ class PydanticClass(PydanticBase):
     forward_refs: List[Import] = []
     filename: str = ""
 
-    @validator("filename", always=True)
-    def filename_val(cls, v, values) -> str:
-        if not values["valid_name"]:
+    # TODO[pydantic]: We couldn't refactor the `validator`, please replace it by `field_validator` manually.
+    # Check https://docs.pydantic.dev/dev-v2/migration/#changes-to-validators for more information.
+    @field_validator("filename")
+    def validate_filename(cls, value) -> str:
+        if not value:
             raise ValueError()
-        filename = values["valid_name"]
+        filename = value
         if filename in {
             "class",
             "def",
@@ -61,8 +65,8 @@ class PydanticClass(PydanticBase):
             "return",
             "yield",
         }:
-            return f'{filename}_'
-        return values['valid_name']
+            return f"{filename}_"
+        return value
 
 
-PydanticClass.update_forward_refs()
+PydanticClass.model_rebuild()

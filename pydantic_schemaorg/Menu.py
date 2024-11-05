@@ -14,17 +14,20 @@ class Menu(CreativeWork):
     See: https://schema.org/Menu
     Model depth: 3
     """
-    type_: str = Field(default="Menu", alias='@type', const=True)
-    hasMenuSection: Optional[Union[List[Union['MenuSection', str]], 'MenuSection', str]] = Field(
-        default=None,
-        description="A subgrouping of the menu (by dishes, course, serving time period, etc.).",
-    )
-    hasMenuItem: Optional[Union[List[Union['MenuItem', str]], 'MenuItem', str]] = Field(
+
+    type_: str = Field(default="Menu", alias="@type", Literal=True)
+    hasMenuItem: Optional[Union[List[Union["MenuItem", str]], "MenuItem", str]] = Field(
         default=None,
         description="A food or drink item contained in a menu or menu section.",
     )
-    
+    hasMenuSection: Optional[
+        Union[List[Union["MenuSection", str]], "MenuSection", str]
+    ] = Field(
+        default=None,
+        description="A subgrouping of the menu (by dishes, course, serving time period, etc.).",
+    )
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.MenuSection import MenuSection
     from pydantic_schemaorg.MenuItem import MenuItem
+    from pydantic_schemaorg.MenuSection import MenuSection

@@ -8,10 +8,10 @@ from pydantic_schemaorg.TransferAction import TransferAction
 class TakeAction(TransferAction):
     """The act of gaining ownership of an object from an origin. Reciprocal of GiveAction. Related"
      "actions: * [[GiveAction]]: The reciprocal of TakeAction. * [[ReceiveAction]]: Unlike"
-     "ReceiveAction, TakeAction implies that ownership has been transfered.
+     "ReceiveAction, TakeAction implies that ownership has been transferred.
 
     See: https://schema.org/TakeAction
     Model depth: 4
     """
-    type_: str = Field(default="TakeAction", alias='@type', const=True)
-    
+
+    type_: str = Field(default="TakeAction", alias="@type", Literal=True)

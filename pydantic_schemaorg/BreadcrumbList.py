@@ -8,7 +8,7 @@ from pydantic_schemaorg.ItemList import ItemList
 class BreadcrumbList(ItemList):
     """A BreadcrumbList is an ItemList consisting of a chain of linked Web pages, typically"
      "described using at least their URL and their name, and typically ending with the current"
-     "page. The [[position]] property is used to reconstruct the order of the items in a BreadcrumbList"
+     "page. The [[position]] property is used to reconstruct the order of the items in a BreadcrumbList."
      "The convention is that a breadcrumb list has an [[itemListOrder]] of [[ItemListOrderAscending]]"
      "(lower values listed first), and that the first items in this list correspond to the \"top\""
      "or beginning of the breadcrumb trail, e.g. with a site or section homepage. The specific"
@@ -18,5 +18,5 @@ class BreadcrumbList(ItemList):
     See: https://schema.org/BreadcrumbList
     Model depth: 4
     """
-    type_: str = Field(default="BreadcrumbList", alias='@type', const=True)
-    
+
+    type_: str = Field(default="BreadcrumbList", alias="@type", Literal=True)

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.PriceComponentTypeEnumeration import PriceComponentTypeEnumeration
+from pydantic_schemaorg.PriceComponentTypeEnumeration import (
+    PriceComponentTypeEnumeration,
+)
 
 
 class ActivationFee(PriceComponentTypeEnumeration):
@@ -12,5 +14,5 @@ class ActivationFee(PriceComponentTypeEnumeration):
     See: https://schema.org/ActivationFee
     Model depth: 5
     """
-    type_: str = Field(default="ActivationFee", alias='@type', const=True)
-    
+
+    type_: str = Field(default="ActivationFee", alias="@type", Literal=True)

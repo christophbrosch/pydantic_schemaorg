@@ -20,33 +20,44 @@ class DefinedRegion(StructuredValue):
     See: https://schema.org/DefinedRegion
     Model depth: 4
     """
-    type_: str = Field(default="DefinedRegion", alias='@type', const=True)
-    postalCode: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+
+    type_: str = Field(default="DefinedRegion", alias="@type", Literal=True)
+    addressCountry: Optional[
+        Union[List[Union[str, "Text", "Country"]], str, "Text", "Country"]
+    ] = Field(
+        default=None,
+        description="The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2"
+        "country code](http://en.wikipedia.org/wiki/ISO_3166-1).",
+    )
+    postalCode: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="The postal code. For example, 94043.",
     )
-    postalCodePrefix: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="A defined range of postal codes indicated by a common textual prefix. Used for non-numeric"
-     "systems such as UK.",
-    )
-    addressCountry: Optional[Union[List[Union[str, 'Text', 'Country']], str, 'Text', 'Country']] = Field(
-        default=None,
-        description="The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2"
-     "country code](http://en.wikipedia.org/wiki/ISO_3166-1).",
-    )
-    postalCodeRange: Optional[Union[List[Union['PostalCodeRangeSpecification', str]], 'PostalCodeRangeSpecification', str]] = Field(
+    postalCodeRange: Optional[
+        Union[
+            List[Union["PostalCodeRangeSpecification", str]],
+            "PostalCodeRangeSpecification",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="A defined range of postal codes.",
     )
-    addressRegion: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    postalCodePrefix: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="A defined range of postal codes indicated by a common textual prefix. Used for non-numeric"
+        "systems such as UK.",
+    )
+    addressRegion: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="The region in which the locality is, and which is in the country. For example, California"
-     "or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country)",
+        "or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country).",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.PostalCodeRangeSpecification import PostalCodeRangeSpecification
+    from pydantic_schemaorg.PostalCodeRangeSpecification import (
+        PostalCodeRangeSpecification,
+    )

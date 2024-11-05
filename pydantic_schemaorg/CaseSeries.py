@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.MedicalObservationalStudyDesign import MedicalObservationalStudyDesign
+from pydantic_schemaorg.MedicalObservationalStudyDesign import (
+    MedicalObservationalStudyDesign,
+)
 
 
 class CaseSeries(MedicalObservationalStudyDesign):
@@ -17,5 +19,5 @@ class CaseSeries(MedicalObservationalStudyDesign):
     See: https://schema.org/CaseSeries
     Model depth: 6
     """
-    type_: str = Field(default="CaseSeries", alias='@type', const=True)
-    
+
+    type_: str = Field(default="CaseSeries", alias="@type", Literal=True)

@@ -6,11 +6,11 @@ from pydantic_schemaorg.Enumeration import Enumeration
 
 
 class MusicAlbumProductionType(Enumeration):
-    """Classification of the album by it's type of content: soundtrack, live album, studio"
-     "album, etc.
+    """Classification of the album by its type of content: soundtrack, live album, studio album,"
+     "etc.
 
     See: https://schema.org/MusicAlbumProductionType
     Model depth: 4
     """
-    type_: str = Field(default="MusicAlbumProductionType", alias='@type', const=True)
-    
+
+    type_: str = Field(default="MusicAlbumProductionType", alias="@type", Literal=True)

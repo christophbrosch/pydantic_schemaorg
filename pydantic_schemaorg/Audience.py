@@ -14,18 +14,21 @@ class Audience(Intangible):
     See: https://schema.org/Audience
     Model depth: 3
     """
-    type_: str = Field(default="Audience", alias='@type', const=True)
-    audienceType: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The target group associated with a given audience (e.g. veterans, car owners, musicians,"
-     "etc.).",
-    )
-    geographicArea: Optional[Union[List[Union['AdministrativeArea', str]], 'AdministrativeArea', str]] = Field(
+
+    type_: str = Field(default="Audience", alias="@type", Literal=True)
+    geographicArea: Optional[
+        Union[List[Union["AdministrativeArea", str]], "AdministrativeArea", str]
+    ] = Field(
         default=None,
         description="The geographic area associated with the audience.",
     )
-    
+    audienceType: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The target group associated with a given audience (e.g. veterans, car owners, musicians,"
+        "etc.).",
+    )
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+    from pydantic_schemaorg.Text import Text

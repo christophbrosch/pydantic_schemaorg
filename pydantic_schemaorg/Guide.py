@@ -9,7 +9,7 @@ from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
 class Guide(CreativeWork):
-    """[[Guide]] is a page or article that recommend specific products or services, or aspects"
+    """[[Guide]] is a page or article that recommends specific products or services, or aspects"
      "of a thing for a user to consider. A [[Guide]] may represent a Buying Guide and detail aspects"
      "of products or services for a user to consider. A [[Guide]] may represent a Product Guide"
      "and recommend specific products or services. A [[Guide]] may represent a Ranked List"
@@ -18,12 +18,13 @@ class Guide(CreativeWork):
     See: https://schema.org/Guide
     Model depth: 3
     """
-    type_: str = Field(default="Guide", alias='@type', const=True)
-    reviewAspect: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+
+    type_: str = Field(default="Guide", alias="@type", Literal=True)
+    reviewAspect: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="This Review or Rating is relevant to this part or facet of the itemReviewed.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text

@@ -15,32 +15,52 @@ class Question(Comment):
     See: https://schema.org/Question
     Model depth: 4
     """
-    type_: str = Field(default="Question", alias='@type', const=True)
-    eduQuestionType: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+
+    type_: str = Field(default="Question", alias="@type", Literal=True)
+    parentItem: Optional[
+        Union[
+            List[Union["Comment", "CreativeWork", str]], "Comment", "CreativeWork", str
+        ]
+    ] = Field(
+        default=None,
+        description="The parent of a question, answer or item in general. Typically used for Q/A discussion"
+        "threads e.g. a chain of comments with the first comment being an [[Article]] or other"
+        "[[CreativeWork]]. See also [[comment]] which points from something to a comment about"
+        "it.",
+    )
+    suggestedAnswer: Optional[
+        Union[List[Union["Answer", "ItemList", str]], "Answer", "ItemList", str]
+    ] = Field(
+        default=None,
+        description="An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer"
+        "site.",
+    )
+    eduQuestionType: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="For questions that are part of learning resources (e.g. Quiz), eduQuestionType indicates"
-     "the format of question being given. Example: \"Multiple choice\", \"Open ended\","
-     "\"Flashcard\".",
+        'the format of question being given. Example: "Multiple choice", "Open ended",'
+        '"Flashcard".',
     )
-    answerCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+    answerCount: Optional[
+        Union[List[Union[int, "Integer", str]], int, "Integer", str]
+    ] = Field(
         default=None,
         description="The number of answers this question has received.",
     )
-    suggestedAnswer: Optional[Union[List[Union['ItemList', 'Answer', str]], 'ItemList', 'Answer', str]] = Field(
-        default=None,
-        description="An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer"
-     "site.",
-    )
-    acceptedAnswer: Optional[Union[List[Union['ItemList', 'Answer', str]], 'ItemList', 'Answer', str]] = Field(
+    acceptedAnswer: Optional[
+        Union[List[Union["Answer", "ItemList", str]], "Answer", "ItemList", str]
+    ] = Field(
         default=None,
         description="The answer(s) that has been accepted as best, typically on a Question/Answer site. Sites"
-     "vary in their selection mechanisms, e.g. drawing on community opinion and/or the view"
-     "of the Question author.",
+        "vary in their selection mechanisms, e.g. drawing on community opinion and/or the view"
+        "of the Question author.",
     )
-    
+
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.Comment import Comment
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.Answer import Answer
+    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Integer import Integer
-    from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.Answer import Answer

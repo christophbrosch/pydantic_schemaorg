@@ -6,11 +6,11 @@ from pydantic_schemaorg.MedicalSpecialty import MedicalSpecialty
 
 
 class Infectious(MedicalSpecialty):
-    """Something in medical science that pertains to infectious diseases i.e caused by bacterial,"
+    """Something in medical science that pertains to infectious diseases, i.e. caused by bacterial,"
      "viral, fungal or parasitic infections.
 
     See: https://schema.org/Infectious
     Model depth: 6
     """
-    type_: str = Field(default="Infectious", alias='@type', const=True)
-    
+
+    type_: str = Field(default="Infectious", alias="@type", Literal=True)

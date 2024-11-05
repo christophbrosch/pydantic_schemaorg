@@ -2,11 +2,11 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.PaymentCard import PaymentCard
 from pydantic_schemaorg.LoanOrCredit import LoanOrCredit
+from pydantic_schemaorg.PaymentCard import PaymentCard
 
 
-class CreditCard(PaymentCard, LoanOrCredit):
+class CreditCard(LoanOrCredit, PaymentCard):
     """A card payment method of a particular brand or name. Used to mark up a particular payment"
      "method and/or the financial product/service that supplies the card account. Commonly"
      "used values: * http://purl.org/goodrelations/v1#AmericanExpress * http://purl.org/goodrelations/v1#DinersClub"
@@ -14,7 +14,7 @@ class CreditCard(PaymentCard, LoanOrCredit):
      "* http://purl.org/goodrelations/v1#MasterCard * http://purl.org/goodrelations/v1#VISA
 
     See: https://schema.org/CreditCard
-    Model depth: 6
+    Model depth: 5
     """
-    type_: str = Field(default="CreditCard", alias='@type', const=True)
-    
+
+    type_: str = Field(default="CreditCard", alias="@type", Literal=True)

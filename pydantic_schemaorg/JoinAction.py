@@ -18,12 +18,13 @@ class JoinAction(InteractAction):
     See: https://schema.org/JoinAction
     Model depth: 4
     """
-    type_: str = Field(default="JoinAction", alias='@type', const=True)
-    event: Optional[Union[List[Union['Event', str]], 'Event', str]] = Field(
+
+    type_: str = Field(default="JoinAction", alias="@type", Literal=True)
+    event: Optional[Union[List[Union["Event", str]], "Event", str]] = Field(
         default=None,
         description="Upcoming or past event associated with this place, organization, or action.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Event import Event

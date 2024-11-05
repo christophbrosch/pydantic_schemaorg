@@ -16,17 +16,18 @@ class MoveAction(Action):
     See: https://schema.org/MoveAction
     Model depth: 3
     """
-    type_: str = Field(default="MoveAction", alias='@type', const=True)
-    fromLocation: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
-        default=None,
-        description="A sub property of location. The original location of the object or the agent before the"
-     "action.",
-    )
-    toLocation: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+
+    type_: str = Field(default="MoveAction", alias="@type", Literal=True)
+    toLocation: Optional[Union[List[Union["Place", str]], "Place", str]] = Field(
         default=None,
         description="A sub property of location. The final location of the object or the agent after the action.",
     )
-    
+    fromLocation: Optional[Union[List[Union["Place", str]], "Place", str]] = Field(
+        default=None,
+        description="A sub property of location. The original location of the object or the agent before the"
+        "action.",
+    )
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Place import Place

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.PriceComponentTypeEnumeration import PriceComponentTypeEnumeration
+from pydantic_schemaorg.PriceComponentTypeEnumeration import (
+    PriceComponentTypeEnumeration,
+)
 
 
 class Installment(PriceComponentTypeEnumeration):
@@ -11,5 +13,5 @@ class Installment(PriceComponentTypeEnumeration):
     See: https://schema.org/Installment
     Model depth: 5
     """
-    type_: str = Field(default="Installment", alias='@type', const=True)
-    
+
+    type_: str = Field(default="Installment", alias="@type", Literal=True)

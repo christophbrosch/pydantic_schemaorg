@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.MedicalObservationalStudyDesign import MedicalObservationalStudyDesign
+from pydantic_schemaorg.MedicalObservationalStudyDesign import (
+    MedicalObservationalStudyDesign,
+)
 
 
 class Longitudinal(MedicalObservationalStudyDesign):
@@ -14,5 +16,5 @@ class Longitudinal(MedicalObservationalStudyDesign):
     See: https://schema.org/Longitudinal
     Model depth: 6
     """
-    type_: str = Field(default="Longitudinal", alias='@type', const=True)
-    
+
+    type_: str = Field(default="Longitudinal", alias="@type", Literal=True)

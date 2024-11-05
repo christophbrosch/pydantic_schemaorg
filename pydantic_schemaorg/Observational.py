@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 from pydantic import Field
-from pydantic_schemaorg.MedicalObservationalStudyDesign import MedicalObservationalStudyDesign
+from pydantic_schemaorg.MedicalObservationalStudyDesign import (
+    MedicalObservationalStudyDesign,
+)
 
 
 class Observational(MedicalObservationalStudyDesign):
@@ -11,5 +13,5 @@ class Observational(MedicalObservationalStudyDesign):
     See: https://schema.org/Observational
     Model depth: 6
     """
-    type_: str = Field(default="Observational", alias='@type', const=True)
-    
+
+    type_: str = Field(default="Observational", alias="@type", Literal=True)

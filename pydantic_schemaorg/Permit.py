@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from datetime import date, datetime
+from typing import List, Optional, Union
 
 
 from pydantic import Field
@@ -15,42 +15,61 @@ class Permit(Intangible):
     See: https://schema.org/Permit
     Model depth: 3
     """
-    type_: str = Field(default="Permit", alias='@type', const=True)
-    issuedThrough: Optional[Union[List[Union['Service', str]], 'Service', str]] = Field(
-        default=None,
-        description="The service through with the permit was granted.",
+
+    type_: str = Field(default="Permit", alias="@type", Literal=True)
+    validUntil: Optional[Union[List[Union[date, "Date", str]], date, "Date", str]] = (
+        Field(
+            default=None,
+            description="The date when the item is no longer valid.",
+        )
     )
-    validFor: Optional[Union[List[Union['Duration', str]], 'Duration', str]] = Field(
+    validIn: Optional[
+        Union[List[Union["AdministrativeArea", str]], "AdministrativeArea", str]
+    ] = Field(
         default=None,
-        description="The duration of validity of a permit or similar thing.",
+        description="The geographic area where the item is valid. Applies for example to a [[Permit]], a [[Certification]],"
+        "or an [[EducationalOccupationalCredential]].",
     )
-    validUntil: Optional[Union[List[Union[date, 'Date', str]], date, 'Date', str]] = Field(
-        default=None,
-        description="The date when the item is no longer valid.",
-    )
-    validFrom: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    validFrom: Optional[
+        Union[
+            List[Union[datetime, "DateTime", date, "Date", str]],
+            datetime,
+            "DateTime",
+            date,
+            "Date",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="The date when the item becomes valid.",
     )
-    permitAudience: Optional[Union[List[Union['Audience', str]], 'Audience', str]] = Field(
+    issuedThrough: Optional[Union[List[Union["Service", str]], "Service", str]] = Field(
         default=None,
-        description="The target audience for this permit.",
+        description="The service through which the permit was granted.",
     )
-    issuedBy: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    issuedBy: Optional[Union[List[Union["Organization", str]], "Organization", str]] = (
+        Field(
+            default=None,
+            description="The organization issuing the item, for example a [[Permit]], [[Ticket]], or [[Certification]].",
+        )
+    )
+    permitAudience: Optional[Union[List[Union["Audience", str]], "Audience", str]] = (
+        Field(
+            default=None,
+            description="The target audience for this permit.",
+        )
+    )
+    validFor: Optional[Union[List[Union["Duration", str]], "Duration", str]] = Field(
         default=None,
-        description="The organization issuing the ticket or permit.",
+        description="The duration of validity of a permit or similar thing.",
     )
-    validIn: Optional[Union[List[Union['AdministrativeArea', str]], 'AdministrativeArea', str]] = Field(
-        default=None,
-        description="The geographic area where a permit or similar thing is valid.",
-    )
-    
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Audience import Audience
-    from pydantic_schemaorg.Organization import Organization
     from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+    from pydantic_schemaorg.DateTime import DateTime
+    from pydantic_schemaorg.Service import Service
+    from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Audience import Audience
+    from pydantic_schemaorg.Duration import Duration

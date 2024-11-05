@@ -14,16 +14,21 @@ class BoatTrip(Trip):
     See: https://schema.org/BoatTrip
     Model depth: 4
     """
-    type_: str = Field(default="BoatTrip", alias='@type', const=True)
-    arrivalBoatTerminal: Optional[Union[List[Union['BoatTerminal', str]], 'BoatTerminal', str]] = Field(
-        default=None,
-        description="The terminal or port from which the boat arrives.",
-    )
-    departureBoatTerminal: Optional[Union[List[Union['BoatTerminal', str]], 'BoatTerminal', str]] = Field(
+
+    type_: str = Field(default="BoatTrip", alias="@type", Literal=True)
+    departureBoatTerminal: Optional[
+        Union[List[Union["BoatTerminal", str]], "BoatTerminal", str]
+    ] = Field(
         default=None,
         description="The terminal or port from which the boat departs.",
     )
-    
+    arrivalBoatTerminal: Optional[
+        Union[List[Union["BoatTerminal", str]], "BoatTerminal", str]
+    ] = Field(
+        default=None,
+        description="The terminal or port from which the boat arrives.",
+    )
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.BoatTerminal import BoatTerminal

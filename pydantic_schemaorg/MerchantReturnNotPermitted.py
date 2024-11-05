@@ -11,5 +11,7 @@ class MerchantReturnNotPermitted(MerchantReturnEnumeration):
     See: https://schema.org/MerchantReturnNotPermitted
     Model depth: 5
     """
-    type_: str = Field(default="MerchantReturnNotPermitted", alias='@type', const=True)
-    
+
+    type_: str = Field(
+        default="MerchantReturnNotPermitted", alias="@type", Literal=True
+    )

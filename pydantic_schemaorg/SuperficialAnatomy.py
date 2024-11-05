@@ -28,36 +28,50 @@ class SuperficialAnatomy(MedicalEntity):
     See: https://schema.org/SuperficialAnatomy
     Model depth: 3
     """
-    type_: str = Field(default="SuperficialAnatomy", alias='@type', const=True)
-    significance: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The significance associated with the superficial anatomy; as an example, how characteristics"
-     "of the superficial anatomy can suggest underlying medical conditions or courses of"
-     "treatment.",
-    )
-    relatedAnatomy: Optional[Union[List[Union['AnatomicalSystem', 'AnatomicalStructure', str]], 'AnatomicalSystem', 'AnatomicalStructure', str]] = Field(
+
+    type_: str = Field(default="SuperficialAnatomy", alias="@type", Literal=True)
+    relatedAnatomy: Optional[
+        Union[
+            List[Union["AnatomicalSystem", "AnatomicalStructure", str]],
+            "AnatomicalSystem",
+            "AnatomicalStructure",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="Anatomical systems or structures that relate to the superficial anatomy.",
     )
-    relatedCondition: Optional[Union[List[Union['MedicalCondition', str]], 'MedicalCondition', str]] = Field(
+    significance: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The significance associated with the superficial anatomy; as an example, how characteristics"
+        "of the superficial anatomy can suggest underlying medical conditions or courses of"
+        "treatment.",
+    )
+    associatedPathophysiology: Optional[
+        Union[List[Union[str, "Text"]], str, "Text"]
+    ] = Field(
+        default=None,
+        description="If applicable, a description of the pathophysiology associated with the anatomical"
+        "system, including potential abnormal changes in the mechanical, physical, and biochemical"
+        "functions of the system.",
+    )
+    relatedCondition: Optional[
+        Union[List[Union["MedicalCondition", str]], "MedicalCondition", str]
+    ] = Field(
         default=None,
         description="A medical condition associated with this anatomy.",
     )
-    relatedTherapy: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
+    relatedTherapy: Optional[
+        Union[List[Union["MedicalTherapy", str]], "MedicalTherapy", str]
+    ] = Field(
         default=None,
         description="A medical therapy related to this anatomy.",
     )
-    associatedPathophysiology: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="If applicable, a description of the pathophysiology associated with the anatomical"
-     "system, including potential abnormal changes in the mechanical, physical, and biochemical"
-     "functions of the system.",
-    )
-    
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
     from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
+    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.MedicalCondition import MedicalCondition
     from pydantic_schemaorg.MedicalTherapy import MedicalTherapy

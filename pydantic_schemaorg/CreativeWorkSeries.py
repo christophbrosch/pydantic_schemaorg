@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from datetime import date, datetime
 from typing import List, Optional, Union
+from datetime import date, datetime
 
 
 from pydantic import Field
@@ -15,7 +15,7 @@ class CreativeWorkSeries(Series, CreativeWork):
      "of the same kind. CreativeWorkSeries are usually organized into some order, often chronological."
      "Unlike [[ItemList]] which is a general purpose data structure for lists of things, the"
      "emphasis with CreativeWorkSeries is on published materials (written e.g. books and"
-     "periodicals, or media such as tv, radio and games). Specific subtypes are available"
+     "periodicals, or media such as TV, radio and games). Specific subtypes are available"
      "for describing [[TVSeries]], [[RadioSeries]], [[MovieSeries]], [[BookSeries]],"
      "[[Periodical]] and [[VideoGameSeries]]. In each case, the [[hasPart]] / [[isPartOf]]"
      "properties can be used to relate the CreativeWorkSeries to its parts. The general CreativeWorkSeries"
@@ -28,24 +28,43 @@ class CreativeWorkSeries(Series, CreativeWork):
     See: https://schema.org/CreativeWorkSeries
     Model depth: 3
     """
-    type_: str = Field(default="CreativeWorkSeries", alias='@type', const=True)
-    endDate: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+
+    type_: str = Field(default="CreativeWorkSeries", alias="@type", Literal=True)
+    issn: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="The International Standard Serial Number (ISSN) that identifies this serial publication."
+        "You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L)"
+        "for, this serial publication.",
+    )
+    endDate: Optional[
+        Union[
+            List[Union[datetime, "DateTime", date, "Date", str]],
+            datetime,
+            "DateTime",
+            date,
+            "Date",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
     )
-    startDate: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    startDate: Optional[
+        Union[
+            List[Union[datetime, "DateTime", date, "Date", str]],
+            datetime,
+            "DateTime",
+            date,
+            "Date",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
     )
-    issn: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The International Standard Serial Number (ISSN) that identifies this serial publication."
-     "You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L)"
-     "for, this serial publication.",
-    )
-    
+
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Text import Text

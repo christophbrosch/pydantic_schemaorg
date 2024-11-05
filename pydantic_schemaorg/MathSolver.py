@@ -14,14 +14,19 @@ class MathSolver(CreativeWork):
     See: https://schema.org/MathSolver
     Model depth: 3
     """
-    type_: str = Field(default="MathSolver", alias='@type', const=True)
-    mathExpression: Optional[Union[List[Union[str, 'Text', 'SolveMathAction']], str, 'Text', 'SolveMathAction']] = Field(
+
+    type_: str = Field(default="MathSolver", alias="@type", Literal=True)
+    mathExpression: Optional[
+        Union[
+            List[Union[str, "Text", "SolveMathAction"]], str, "Text", "SolveMathAction"
+        ]
+    ] = Field(
         default=None,
         description="A mathematical expression (e.g. 'x^2-3x=0') that may be solved for a specific variable,"
-     "simplified, or transformed. This can take many formats, e.g. LaTeX, Ascii-Math, or"
-     "math as you would write with a keyboard.",
+        "simplified, or transformed. This can take many formats, e.g. LaTeX, Ascii-Math, or"
+        "math as you would write with a keyboard.",
     )
-    
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text

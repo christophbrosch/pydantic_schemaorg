@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from pydantic import AnyUrl
+from typing import List, Optional, Union
 
 
 from pydantic import Field
@@ -19,18 +19,27 @@ class DefinedTerm(Intangible):
     See: https://schema.org/DefinedTerm
     Model depth: 3
     """
-    type_: str = Field(default="DefinedTerm", alias='@type', const=True)
-    termCode: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="A code that identifies this [[DefinedTerm]] within a [[DefinedTermSet]]",
-    )
-    inDefinedTermSet: Optional[Union[List[Union[AnyUrl, 'URL', 'DefinedTermSet', str]], AnyUrl, 'URL', 'DefinedTermSet', str]] = Field(
+
+    type_: str = Field(default="DefinedTerm", alias="@type", Literal=True)
+    inDefinedTermSet: Optional[
+        Union[
+            List[Union[AnyUrl, "URL", "DefinedTermSet", str]],
+            AnyUrl,
+            "URL",
+            "DefinedTermSet",
+            str,
+        ]
+    ] = Field(
         default=None,
         description="A [[DefinedTermSet]] that contains this term.",
     )
-    
+    termCode: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="A code that identifies this [[DefinedTerm]] within a [[DefinedTermSet]].",
+    )
+
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.DefinedTermSet import DefinedTermSet
+    from pydantic_schemaorg.Text import Text

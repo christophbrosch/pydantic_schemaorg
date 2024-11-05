@@ -13,5 +13,5 @@ class Podiatric(MedicalSpecialty, MedicalBusiness):
     See: https://schema.org/Podiatric
     Model depth: 5
     """
-    type_: str = Field(default="Podiatric", alias='@type', const=True)
-    
+
+    type_: str = Field(default="Podiatric", alias="@type", Literal=True)

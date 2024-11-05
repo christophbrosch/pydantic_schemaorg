@@ -9,22 +9,25 @@ from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
 class PostalCodeRangeSpecification(StructuredValue):
-    """Indicates a range of postalcodes, usually defined as the set of valid codes between [[postalCodeBegin]]"
+    """Indicates a range of postal codes, usually defined as the set of valid codes between [[postalCodeBegin]]"
      "and [[postalCodeEnd]], inclusively.
 
     See: https://schema.org/PostalCodeRangeSpecification
     Model depth: 4
     """
-    type_: str = Field(default="PostalCodeRangeSpecification", alias='@type', const=True)
-    postalCodeEnd: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="Last postal code in the range (included). Needs to be after [[postalCodeBegin]].",
+
+    type_: str = Field(
+        default="PostalCodeRangeSpecification", alias="@type", Literal=True
     )
-    postalCodeBegin: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    postalCodeBegin: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
         default=None,
         description="First postal code in a range (included).",
     )
-    
+    postalCodeEnd: Optional[Union[List[Union[str, "Text"]], str, "Text"]] = Field(
+        default=None,
+        description="Last postal code in the range (included). Needs to be after [[postalCodeBegin]].",
+    )
+
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text

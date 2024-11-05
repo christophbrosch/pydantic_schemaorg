@@ -15,20 +15,39 @@ class Comment(CreativeWork):
     See: https://schema.org/Comment
     Model depth: 3
     """
-    type_: str = Field(default="Comment", alias='@type', const=True)
-    downvoteCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+
+    type_: str = Field(default="Comment", alias="@type", Literal=True)
+    parentItem: Optional[
+        Union[
+            List[Union["Comment", "CreativeWork", str]], "Comment", "CreativeWork", str
+        ]
+    ] = Field(
         default=None,
-        description="The number of downvotes this question, answer or comment has received from the community.",
+        description="The parent of a question, answer or item in general. Typically used for Q/A discussion"
+        "threads e.g. a chain of comments with the first comment being an [[Article]] or other"
+        "[[CreativeWork]]. See also [[comment]] which points from something to a comment about"
+        "it.",
     )
-    upvoteCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+    sharedContent: Optional[
+        Union[List[Union["CreativeWork", str]], "CreativeWork", str]
+    ] = Field(
+        default=None,
+        description="A CreativeWork such as an image, video, or audio clip shared as part of this posting.",
+    )
+    upvoteCount: Optional[
+        Union[List[Union[int, "Integer", str]], int, "Integer", str]
+    ] = Field(
         default=None,
         description="The number of upvotes this question, answer or comment has received from the community.",
     )
-    parentItem: Optional[Union[List[Union['Comment', str]], 'Comment', str]] = Field(
+    downvoteCount: Optional[
+        Union[List[Union[int, "Integer", str]], int, "Integer", str]
+    ] = Field(
         default=None,
-        description="The parent of a question, answer or item in general.",
+        description="The number of downvotes this question, answer or comment has received from the community.",
     )
-    
+
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.CreativeWork import CreativeWork
     from pydantic_schemaorg.Integer import Integer

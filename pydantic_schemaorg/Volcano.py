@@ -6,10 +6,10 @@ from pydantic_schemaorg.Landform import Landform
 
 
 class Volcano(Landform):
-    """A volcano, like Fuji san.
+    """A volcano, like Fujisan.
 
     See: https://schema.org/Volcano
     Model depth: 4
     """
-    type_: str = Field(default="Volcano", alias='@type', const=True)
-    
+
+    type_: str = Field(default="Volcano", alias="@type", Literal=True)
